@@ -9,8 +9,9 @@ while True:
 
     if not ret:
         break
+    frame = cv2.flip(frame, 1)
     gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
-    frame=cv2.flip(frame,1)
+
     faces = face_cascade.detectMultiScale(
         gray,
         scaleFactor=1.1,
