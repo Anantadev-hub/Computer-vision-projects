@@ -15,6 +15,16 @@ upper_green = np.array([85,255,255])
 # Yellow color range in HSV
 lower_yellow= np.array([20,100,100])
 upper_yellow = np.array([35,255,255])
+
+#Black colour range in HSV
+lower_black = np.array([0,0,0])
+upper_black = np.array([180,255,52])
+
+#Red Colour range in HSV
+lower_red1=np.array([159,50,70])
+upper_red1=np.array([180,250,100])
+lower_red2=np.array([0,50,70])
+upper_red2=np.array([9,255,200])
 while True:
     # Capture frame
     ret, frame = cap.read()
