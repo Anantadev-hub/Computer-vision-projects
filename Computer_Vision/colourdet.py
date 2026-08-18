@@ -338,6 +338,64 @@ while True:
                 (255, 255, 255),
                 2
             )
+    # Find contours of black objects
+    contours, _ = cv2.findContours(
+        mask6,
+        cv2.RETR_EXTERNAL,
+        cv2.CHAIN_APPROX_SIMPLE
+    )
+
+    # Loop through all detected black objects
+    for contour in contours:
+
+        # Ignore very small objects
+        if cv2.contourArea(contour) > 500:
+            # Get bounding rectangle
+            x, y, w, h = cv2.boundingRect(contour)
+
+            # Draw rectangle
+            cv2.rectangle(
+                frame,
+                (x, y),
+                (x + w, y + h),
+                (255, 0, 0),
+                2
+            )
+
+            # Calculate center
+            cx = x + w // 2
+            cy = y + h // 2
+
+            # Draw center point
+            cv2.circle(
+                frame,
+                (cx, cy),
+                5,
+                (0, 0, 255),
+                -1
+            )
+
+            # Display color name
+            cv2.putText(
+                frame,
+                "BLACK",
+                (x, y - 10),
+                cv2.FONT_HERSHEY_SIMPLEX,
+                0.8,
+                (255, 0, 0),
+                2
+            )
+
+            # Display coordinates
+            cv2.putText(
+                frame,
+                f"X:{cx}  Y:{cy}",
+                (x, y + h + 25),
+                cv2.FONT_HERSHEY_SIMPLEX,
+                0.6,
+                (255, 255, 255),
+                2
+            )
 
     # Show webcam
     cv2.imshow("Color Detector", frame)
