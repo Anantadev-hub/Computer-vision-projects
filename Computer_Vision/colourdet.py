@@ -404,6 +404,10 @@ while True:
     cv2.imshow("Mask1", mask1)
     cv2.imshow("Mask2", mask2)
     cv2.imshow("Mask3", mask3)
+    cv2.imshow("Mask4", mask4)
+    cv2.imshow("Mask5", mask5)
+    cv2.imshow("Mask6", mask6)
+
 
     # Quit when Q is pressed
     if cv2.waitKey(1) & 0xFF == ord("q"):
