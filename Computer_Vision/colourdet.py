@@ -42,6 +42,9 @@ while True:
     mask1 = cv2.inRange(hsv, lower_blue, upper_blue)
     mask2 = cv2.inRange(hsv, lower_green, upper_green)
     mask3 = cv2.inRange(hsv, lower_yellow, upper_yellow)
+    mask4 = cv2.inRange(hsv, lower_red1, upper_red1)
+    mask5 = cv2.inRange(hsv, lower_red2, upper_red2)
+    mask6 = cv2.inRange(hsv, lower_black, upper_black)
 
     # Remove small noise
     kernel = np.ones((5, 5), np.uint8)
