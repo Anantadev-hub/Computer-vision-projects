@@ -1,0 +1,5 @@
+x=int(input("Please enter a number:"))
+y=int(input("Please enter a number:"))
+z= x**y +(2*x)**(3*y)
+str_z=str(z)
+print(len(str_z))

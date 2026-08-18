@@ -21,7 +21,7 @@ lower_black = np.array([0,0,0])
 upper_black = np.array([180,255,52])
 
 #Red Colour range in HSV
-lower_red1=np.array([159,50,70])
+lower_red1=np.array([159,50,90])
 upper_red1=np.array([180,250,100])
 lower_red2=np.array([0,50,70])
 upper_red2=np.array([9,255,200])
@@ -32,13 +32,13 @@ while True:
     if not ret:
         break
 
-    # Flip the frame horizontally
+    # Flip the frame horizontally; its important that we do this first unless the box that will appear it will be mirrored wrt the object.
     frame = cv2.flip(frame, 1)
 
     # Convert BGR image to HSV
     hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
 
-    # Create a mask that only keeps blue colors
+    # Create a mask for each colour
     mask1 = cv2.inRange(hsv, lower_blue, upper_blue)
     mask2 = cv2.inRange(hsv, lower_green, upper_green)
     mask3 = cv2.inRange(hsv, lower_yellow, upper_yellow)
@@ -46,7 +46,7 @@ while True:
     mask5 = cv2.inRange(hsv, lower_red2, upper_red2)
     mask6 = cv2.inRange(hsv, lower_black, upper_black)
 
-    # Remove small noise
+    # Remove small noise, each will include erode and dilate; removes noise and fills up any random white noise,
     kernel = np.ones((5, 5), np.uint8)
     mask1 = cv2.erode(mask1, kernel, iterations=1)
     mask1 = cv2.dilate(mask1, kernel, iterations=2)
@@ -169,7 +169,6 @@ while True:
         cv2.RETR_EXTERNAL,
         cv2.CHAIN_APPROX_SIMPLE
     )
-
     # Loop through all detected blue objects
     for contour in contours:
 
