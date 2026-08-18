@@ -54,6 +54,114 @@ while True:
     mask2 = cv2.dilate(mask2, kernel, iterations=2)
     mask3 = cv2.dilate(mask3, kernel, iterations=2)
     mask3 = cv2.erode(mask3, kernel, iterations=1)
+    mask4 = cv2.erode(mask4, kernel, iterations=1)
+    mask4 = cv2.dilate(mask4, kernel, iterations=2)
+    mask5 =cv2.erode(mask5, kernel, iterations=1)
+    mask5 = cv2.dilate(mask5, kernel, iterations=2)
+    mask6 = cv2.erode(mask6, kernel, iterations=1)
+    mask6 = cv2.dilate(mask6, kernel, iterations=2)
+
+    #Find contours of Red1 objects
+    contours, _ = cv2.findContours(
+        mask4,
+        cv2.RETR_EXTERNAL, #Find the outer boundary of each object and represent that boundary using only the necessary points
+        cv2.CHAIN_APPROX_SIMPLE
+
+    )
+    #Loop through all detected red1 objects
+    for contour in contours:
+        if cv2.contourArea(contour) > 500: #ignore very small objects
+            x, y, w, h = cv2.boundingRect(contour)
+            cv2.rectangle(
+                frame,
+                (x,y),
+                (x+w, y+ h),
+                (0, 255, 0),
+                2
+            )
+            # Calculate centre
+            cx = x + w // 2
+            cy = y + h // 2
+            # Draw Centre point
+            cv2.circle(
+                frame,
+                (cx, cy),
+                5,
+                (0, 0, 255),
+                -1
+
+            )
+
+            #Display colour name
+            cv2.putText(
+                frame,
+                "RED",
+                (x, y-10),
+                cv2.FONT_HERSHEY_SIMPLEX,
+                0.8,
+                (255,0,0),
+                2,
+            )
+            #Display coordinates
+            cv2.putText(
+                frame,
+                f"X:{cx}  Y:{cy}",
+                (x, y + h + 25),
+                cv2.FONT_HERSHEY_SIMPLEX,
+                0.6,
+                (255,255,255),
+                2,
+            )
+    #Find contours of Red1 objects
+    contours, _ = cv2.findContours(
+        mask5,
+        cv2.RETR_EXTERNAL, #Find the outer boundary of each object and represent that boundary using only the necessary points
+        cv2.CHAIN_APPROX_SIMPLE
+
+    )
+    for contour in contours:
+        if cv2.contourArea(contour) > 500: #ignore very small objects
+            x, y, w, h = cv2.boundingRect(contour)
+            cv2.rectangle(
+                frame,
+                (x,y),
+                (x+w, y+ h),
+                (0, 255, 0),
+                2
+            )
+            # Calculate centre
+            cx = x + w // 2
+            cy = y + h // 2
+            # Draw Centre point
+            cv2.circle(
+                frame,
+                (cx, cy),
+                5,
+                (0, 0, 255),
+                -1
+
+            )
+
+            #Display colour name
+            cv2.putText(
+                frame,
+                "RED",
+                (x, y-10),
+                cv2.FONT_HERSHEY_SIMPLEX,
+                0.8,
+                (255,0,0),
+                2,
+            )
+            #Display coordinates
+            cv2.putText(
+                frame,
+                f"X:{cx}  Y:{cy}",
+                (x, y + h + 25),
+                cv2.FONT_HERSHEY_SIMPLEX,
+                0.6,
+                (255,255,255),
+                2,
+            )
 
     # Find contours of blue objects
     contours, _ = cv2.findContours(
